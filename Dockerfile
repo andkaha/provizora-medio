@@ -1,22 +1,26 @@
 FROM alpine:latest
 
-RUN apk add --no-cache \
-	bash \
-	coreutils \
-	doas \
-	jq \
-	miller \
-	pipx \
-	xmlstarlet \
-	yq \
-	zsh
+RUN --mount=type=bind,source=apk-packages.list,target=/tmp/apk-packages.list <<END
+cat /tmp/apk-packages.list - <<-LIST >>/etc/apk/world
+	doas
+	py3-pip
+LIST
+apk fix --no-cache
+END
 
-RUN adduser -D -u 6000 -s /bin/bash myself
+RUN adduser -D -u 6000 myself
 RUN echo 'permit nopass myself' >/etc/doas.d/local.conf
 
 USER myself
 WORKDIR /home/myself
-RUN mkdir -p save
 
-RUN pipx install csvkit
-RUN pipx install --suffix=-py yq
+RUN --mount=type=bind,source=pip-packages.list,target=/tmp/pip-packages.list <<END
+python -m venv .venv
+. .venv/bin/activate
+pip install -r /tmp/pip-packages.list
+END
+
+COPY ./bashrc .bashrc
+COPY ./zshrc .zshrc
+
+RUN mkdir -p save

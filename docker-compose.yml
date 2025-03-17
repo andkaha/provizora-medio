@@ -4,8 +4,6 @@ services:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - ./bashrc:/home/myself/.bashrc:ro
-      - ./zshrc:/home/myself/.zshrc:ro
       - provizora-medio:/home/myself/save
 
 volumes:

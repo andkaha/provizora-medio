@@ -1,0 +1,10 @@
+bash
+coreutils
+doas
+ed
+jq
+miller
+pipx
+xmlstarlet
+yq
+zsh
