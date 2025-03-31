@@ -22,7 +22,7 @@ python -m venv .venv
 pip install -r /tmp/pip-packages.list
 END
 
-COPY ./bashrc .bashrc
-COPY ./zshrc .zshrc
+COPY --chown=myself:myself --chmod=644 ./bashrc .bashrc
+COPY --chown=myself:myself --chmod=644 ./zshrc .zshrc
 
 RUN mkdir -p save
