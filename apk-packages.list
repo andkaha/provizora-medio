@@ -1,8 +1,6 @@
-bash
 coreutils
 ed
 jq
 miller
 xmlstarlet
 yq
-zsh

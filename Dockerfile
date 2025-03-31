@@ -2,8 +2,10 @@ FROM alpine:latest
 
 RUN --mount=type=bind,source=apk-packages.list,target=/tmp/apk-packages.list <<END
 cat /tmp/apk-packages.list - <<-LIST >>/etc/apk/world
+	bash
 	doas
 	py3-pip
+	zsh
 LIST
 apk fix --no-cache
 END
