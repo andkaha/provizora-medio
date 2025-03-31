@@ -19,4 +19,6 @@ where you can place persistent files (it is mounted as a volume).
 
 To start, use the provided `provizora-medio` script.  It will build
 the container, and then run it.  It will pass its arguments to the
-container, so you can use it to start a shell, or run a command.
+container, so you can use it to start a shell, or run a command.  If no
+command is given, then the BusyBox shell is started (the default command
+of the Alpine Linux container).
